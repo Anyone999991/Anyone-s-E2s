@@ -1,0 +1,65 @@
+@name Anyone999991's Primer Switch
+@inputs Prime Start
+@outputs 
+@persist E:entity A
+@trigger 
+
+if(first()|dupefinished()){
+
+E = entity()
+
+E:setAlpha(0)
+
+A = 1
+
+holoCreate(A)
+holoModel(A,"models/jazzie/trains/locomotives/emd/cab/control_panel_switch1.mdl")
+holoParent(A,E)
+holoPos(A,E:toWorld(vec(0,0,0.3)))
+holoAng(A,E:toWorld(ang(0,-90,0)))
+holoScale(A,vec(1.5))
+
+A = 2
+
+holoCreate(A)
+holoModel(A,"plane")
+holoParent(A,E)
+holoPos(A,E:toWorld(vec(0,0,0.3)))
+holoAng(A,E:toWorld(ang(0,0,0)))
+holoScale(A,vec(0.5))
+holoMaterial(A,"jazzie/trains/eng_start_switch")
+
+A = 3
+
+holoCreate(A)
+holoModel(A,"models/holograms/hq_stube_thin.mdl")
+holoParent(A,E)
+holoPos(A,E:toWorld(vec(0,0,-0.4)))
+holoAng(A,E:toWorld(ang(0,0,0)))
+holoScale(A,vec(0.5,0.5,0.2))
+holoMaterial(A,"jazzie/trains/grey_metal")
+
+
+
+
+}
+
+if(Prime){
+
+holoAng(1,entity():toWorld(ang(0,-90+45,0)))
+
+}elseif(Start){
+
+holoAng(1,entity():toWorld(ang(0,-90-45,0)))
+
+}else{
+
+holoAng(1,entity():toWorld(ang(0,-90,0)))
+
+}
+
+if(changed(Prime)|changed(Start)){
+
+soundPlay(1,0,"_jazzlok/switches/rotary_switch.wav")
+
+}

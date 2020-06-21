@@ -1,0 +1,80 @@
+@name Anyone's Cab Flags
+@model models/sprops/misc/fittings/cred_3_1_5_short.mdl
+if(first()|dupefinished()){
+
+
+
+
+
+#Config
+
+
+
+
+FlagRight = "flags/usa"          #texture of the right flag
+FlagLeft  = "flags/germany"          #texture of the left flag
+
+PoleMat   = "sprops/textures/sprops_rubber"          #texture of the flagpoles
+BaseMat   = "sprops/textures/sprops_metal5"          #material of the base
+BaseColor = vec(70)       #color of the base
+
+Angle = 70              #angle between the 2 flags
+Pos = 7                 #pos of the flags along the flagpole
+
+
+
+
+#end of config
+
+
+
+
+A=1
+E=entity()
+#base
+E:setColor(BaseColor)
+E:setMaterial(BaseMat)
+
+holoCreate(A)
+holoModel(A,"models/sprops/cylinders/size_1/cylinder_1_5x3.mdl")
+holoParent(A,E)
+holoPos(A,E:toWorld(vec(0,0,0.75)))
+holoAng(A,E:toWorld(ang(0,0,0)))
+holoMaterial(A,BaseMat)
+holoColor(A,BaseColor)
+holoScale(A,vec(1,1,0.5))
+
+#right flag
+
+A++
+
+holoCreate(A)
+holoModel(A,"models/rebelflags/flagpole2.mdl")
+holoParent(A,1)
+holoPos(A,E:toWorld(vec(Pos,0,1)))
+holoAng(A,E:toWorld(ang(-90,0,0)))
+holoEntity(A):setSubMaterial(1,FlagRight)
+holoEntity(A):setSubMaterial(2,PoleMat)
+holoScale(A,vec(0.15))
+
+
+holoAng(1,E:toWorld(ang(0,-Angle,0)))
+
+#left flag
+
+A++
+
+holoCreate(A)
+holoModel(A,"models/rebelflags/flagpole2.mdl")
+holoParent(A,1)
+holoPos(A,E:toWorld(vec(Pos,0,1)))
+holoAng(A,E:toWorld(ang(90,180,0)))
+holoEntity(A):setSubMaterial(1,FlagLeft)
+holoEntity(A):setSubMaterial(2,PoleMat)
+holoScale(A,vec(0.15))
+
+holoAng(1,E:toWorld(ang(0,-Angle/2,0)))
+holoParent(2,E)
+holoParent(3,E)
+holoAng(1,E:toWorld(ang(0,0,0)))
+}
